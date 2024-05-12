@@ -26,7 +26,7 @@ Main proc ;vidu
   int 21h
   
   ; 2 dong sau tuong tu return trong c++;
-  mov ah,4ch
+  mov ah,0
   int 21h
 Main Endp
 END
