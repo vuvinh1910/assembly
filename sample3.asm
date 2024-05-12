@@ -4,7 +4,7 @@
   xuongdong db 13,10,'$'
   nhap db 'nhap ky tu: $'
   xuat db 'ky tu in hoa: $'
-  kytu db ?
+  kytu db ?,'$'  ; neu co them dau '$' danh dau ket thuc chuoi ky tu thi kytu se duoc in theo kieu ah,9
   
 .code
   main proc ;vi du 3
@@ -16,18 +16,19 @@
   int 21h
 
   mov ah,1 ; nhap 1 kytu luu vao al
-  int 21h 
+  int 21h
+  sub al,32 ; ham cong al=al+32
   mov kytu,al
-  sub kytu,20h
 
   mov ah,9
   lea dx,xuongdong
+  int 21h 
+  
+  lea dx,xuat
   int 21h
-
-  mov ah,2
-  mov al,kytu
+  
+  lea dx,kytu  ; vi kytu trong data la 1 chuoi nen in theo ah,9
   int 21h
-
   
   
   
