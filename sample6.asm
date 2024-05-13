@@ -2,13 +2,14 @@
 .stack 100
 .data
   xd db 13,10,'$'
-  xau db 50 dup('$')
+  xau DB 40 dup('$')
   nhap db 'nhap sau: $'
   xuat1 db 'chuoi dao nguoc : $'
 .code
 main proc ; vidu 6
   mov ax,@data
   mov ds,ax
+  mov cx,0
   
   mov ah,9
   lea dx,nhap
@@ -27,7 +28,7 @@ main proc ; vidu 6
   int 21h
   
   mov cl,[xau+1]
-  sub cx,256
+  
   lea si,[xau+2]
   duyetxau:
     push [si]
