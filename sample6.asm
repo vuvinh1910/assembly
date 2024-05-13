@@ -1,4 +1,4 @@
-.model smaill
+.model small
 .stack 100h
 .data
   xd db 13,10,'$'
@@ -30,12 +30,18 @@ main proc ; vidu 6
     push [si]
     inc si
     loop duyetxau
-  mov cl,[xau+1]
+  
   inxau:
+  lea si,[xau+2]
+  inxau1:
+    cmp [si],'$'
+    je endd
+    inc si;
     pop dx;
     int 21h;
-    loop inxau
-
+    loop inxau1
+   
+  endd:
   mov ah,0
   int 21h
     
