@@ -8,7 +8,7 @@ mul bl ; ax = bl x al = 10
 mov ax,20
 mov bx,6
 div bl ;chia 8 bit 
-div dx ;chia 16bit
+div bx ;chia 16bit
 // so bi chia lay trong thanh ghi al neu 8 bit ax neu 16 bit
 // so chia lay trong bl neu 8bit bx neu 12 bit
 // neu chia theo 8bit div bl thi phan nguyen duoc luu trong al va phan du luu trong ah.vd 20/6. ah = 2, al = 3.
