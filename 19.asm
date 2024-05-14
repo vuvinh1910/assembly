@@ -40,16 +40,16 @@ main proc
     lea dx,xd
     int 21h
     
-    lea si,xaua+2
+    lea si,xaua+2 ; con tro si tro den phan tu dau tien cua xaua
     mov y,-1
     
     lapa:
     mov x,si
     add y,1
-    lea di,xaub+2
+    lea di,xaub+2 ; con tro di tro den phan tu dau tien cua xaub
     cmp [si],'$'
     je end1
-    mov ax,[di]
+    mov ax,[di] ; so sanh [si] va [si], vi cmp so sanh thanh ghi nen cho ax=[di] lam trung gian, ko the so sanh truc tiep [di],[si]
     cmp [si],al
     je timchuoi
     lapa1:
@@ -73,7 +73,7 @@ main proc
     timchuoi:
     inc si
     inc di
-    cmp [di],13
+    cmp [di],13 ; so sanh xem da duyet het xaub hay chua, so sanh voi ky tu xuong dong, trong ma ascii la 13
     je luuvitri
     mov ax,[di]
     cmp [si],al
