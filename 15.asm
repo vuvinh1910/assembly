@@ -20,38 +20,38 @@ main proc
     lea dx,tb1
     int 21h
        
-    lea si,list
+    lea si,list ; cho si tro den vi tri dau tien cua mang
     duyetmang:
-    lodsw 
-    cmp ax,'#'
+    lodsw ; ham nay duyet [si] vao thanh ghi ax, va cho si++ moi lan lap
+    cmp ax,'#' ; so sanh ax voi phan tu cuoi mang
     je hetduyetmang
     mov x,ax
-    call xuat
+    call xuat ; ham in ra so co 2 chu so tro len, bang cach % cho 10, push phan du vao stack roi lay ra in tung chu.vd: 15 -> stack(5,1) -> 1,5
     mov ah,9
-    lea dx,cach
+    lea dx,cach ; in dau cach
     int 21h
     jmp duyetmang
      
-    hetduyetmang:
+    hetduyetmang: ; in ra thong bao
     mov ah,9
     lea dx,xd
     int 21h
     lea dx,tb2
     int 21h
     
-    mov bx,11
+    mov bx,11  ; ham nay duyet lai 1 lan nua va kiem tra ax % 11 = 0 hay khong
     lea si,list
     chiahet:
-    lodsw
+    lodsw    ; ax=[si], si++
     cmp ax,'#'
     je endchia
-    mov cx,ax
+    mov cx,ax  ; dua cx = ax vi ax sau khi chia se luu phan nguyen (ax thay doi khi dung div bx)
     xor dx,dx
     div bx
     cmp dx,0
     jne mark1
-    add n,1
-    add tong,cx
+    add n,1   ; neu chia het 11 thi so luong n++
+    add tong,cx ; tong+=cx
     mark1:
     jmp chiahet
     
@@ -66,7 +66,7 @@ main proc
     lea dx,tb3
     int 21h
      
-    mov cx,tong
+    mov cx,tong ; vi tong co the la so >= 2 chu so nen ta dung ham xuat de in so nguyen >=10
     mov x,cx
     call xuat
     
