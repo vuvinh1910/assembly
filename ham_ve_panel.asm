@@ -64,27 +64,29 @@ DRAW_PADDLES proc
 	mov dx, paddle_left_y
 
 	DRAW_PADDLE_LEFT_PIXEL:
-		mov ah, 0ch
-		mov al, 0fh
-		mov bh, 00h
-		int 10h
+		mov ah, 0ch ;ve 1 pixel
+		mov al, 0fh ; chon mau trang
+		mov bh, 00h ; chon trang
+		int 10h ; in ra pixel
 
-		inc cx
-		mov ax, cx
-		sub ax, paddle_left_x
-		cmp ax, paddle_width
-		jng DRAW_PADDLE_LEFT_PIXEL
+		inc cx ; x1 <= cx++ <= x2
+		mov ax, cx ; dua cx vao ax de so sanh
+		sub ax, paddle_left_x ; ax-= base_x de xac dinh do rong hien tai
+		cmp ax, paddle_width ; so sanh voi do rong muc tieu
+		jng DRAW_PADDLE_LEFT_PIXEL ; neu <= thi lap lai de ve
 
-		mov cx, paddle_left_x
-		inc dx
-		mov ax, dx
-		sub ax, paddle_left_y
-		cmp ax, paddle_left_height
-		jng DRAW_PADDLE_LEFT_PIXEL
-
-	mov cx, paddle_right_x
+		mov cx, paddle_left_x ; gan lai gia tri cx vi cx o tren da thay doi (cx++)
+		inc dx ;dx++ la chieu dai
+		mov ax, dx ; dua dx vao ax de so sanh
+		sub ax, paddle_left_y ; ax-=y de xac dinh chieu dai hien tai
+		cmp ax, paddle_left_height ; so sanh <=
+		jng DRAW_PADDLE_LEFT_PIXEL ; lap lai
+		; cu moi lan dx tang len 1 <= base_y thi lap lai ham ve cho den khi dx = base_y thi ket thuc.
+			
+	mov cx, paddle_right_x ; gan lai gia tri
 	mov dx, paddle_right_y
 
+	;ham lap ve panel ben phai,tuong tu o ben tren
 	DRAW_PADDLE_RIGHT_PIXEL:
 		mov ah, 0ch
 		mov al, 0fh
