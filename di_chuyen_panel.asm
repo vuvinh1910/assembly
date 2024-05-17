@@ -1,14 +1,15 @@
 MOVE_PADDLES proc
 
-	mov ah, 01h
+	mov ah, 01h ;  kiểm tra coi có phím nhấn chưa
 	int 16h
-	jnz CHECK_PADDLE_MOVEMENT
+	jnz CHECK_PADDLE_MOVEMENT ;nếu có phím nhấn, zero flag sẽ có giá trị 1
 	ret
 
 	CHECK_PADDLE_MOVEMENT:
-		mov ah, 00h
-		int 16h
+		mov ah, 00h ;   kiểm tra xem phím được nhấn là phím gì ?
+		int 16h	;  trả giá trị phím nhấn vào thanh ghi al
 
+		; di chuyen panel ben trai
 		cmp al, 'w'
 		je MOVE_LEFT_PADDLE_UP
 		cmp al, 'W'
@@ -18,6 +19,7 @@ MOVE_PADDLES proc
 		cmp al, 'S'
 		je MOVE_LEFT_PADDLE_DOWN
 
+		; di chuyen panel ben phai
 		cmp al, 'o'
 		je MOVE_RIGHT_PADDLE_UP
 		cmp al, 'O'
@@ -30,11 +32,11 @@ MOVE_PADDLES proc
 		ret
 
 	MOVE_LEFT_PADDLE_UP:
-		mov ax, paddle_velocity
-		sub paddle_left_y, ax
+		mov ax, paddle_velocity ; ax = van toc vector
+		sub paddle_left_y, ax ; toa do y panel trai -= ax
 		mov ax, 0
-		cmp paddle_left_y, ax
-		jl FIX_PADDLE_LEFT_TOP_POSITION
+		cmp paddle_left_y, ax ; kiem tra xem panel da cham bien chua
+		jl FIX_PADDLE_LEFT_TOP_POSITION ; neu y < ax thi goi ham de giu panel khong bi tran bien
 		ret
 
 	MOVE_LEFT_PADDLE_DOWN:
