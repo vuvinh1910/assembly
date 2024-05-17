@@ -34,22 +34,23 @@ MOVE_PADDLES proc
 
 	MOVE_LEFT_PADDLE_UP:
 		mov ax, paddle_velocity ; ax = van toc vector
-		sub paddle_left_y, ax ; toa do y panel trai -= ax
+		sub paddle_left_y, ax ; toa do y panel trai -= ax, đưa panel lên trên
 		mov ax, 0
 		cmp paddle_left_y, ax ; kiem tra xem panel da chạm biên trên 
-		jl FIX_PADDLE_LEFT_TOP_POSITION ; neu y < 0 thi goi ham de giu panel khong bi tràn biên
+		jl FIX_PADDLE_LEFT_TOP_POSITION ; neu y < 0 thì gọi hàm để giữ panel không bi tràn biên bằng cách cho y cố định = 0
 		ret
 
 	MOVE_LEFT_PADDLE_DOWN:
-		mov ax, paddle_velocity
-		add paddle_left_y, ax
-		mov ax, window_height
-		sub ax, 0
-		sub ax, paddle_left_height
-		cmp paddle_left_y, ax
-		jg FIX_PADDLE_LEFT_BOTTOM_POSITION
+		mov ax, paddle_velocity ; ax = vận tốc panel
+		add paddle_left_y, ax ; y += ax, đưa panel xuống dưới
+		mov ax, window_height ; gán ax cho biên dưới của màn hình
+		sub ax, paddle_left_height ; ax-= chiều dài của panel, vì tọa độ y nằm phía trên cùng bên trái của panel
+		; để so sánh với biên phía dưới ta cần so sánh y với "biên dưới - chiều dài panel"
+		cmp paddle_left_y, ax ; so sánh tọa độ y với ax (biên phía dưới)
+		jg FIX_PADDLE_LEFT_BOTTOM_POSITION ; nếu y > ax thì gọi hàm để giữ panel không tràn biên bằng cách cho y cố dịnh = biên dưới - độ dài panel
 		ret
 
+	; hàm di chuyển vợt phải cũng tương tự vợt trái
 	MOVE_RIGHT_PADDLE_UP:
 		mov ax, paddle_velocity
 		sub paddle_right_y, ax
