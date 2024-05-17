@@ -36,8 +36,8 @@ MOVE_PADDLES proc
 		mov ax, paddle_velocity ; ax = van toc vector
 		sub paddle_left_y, ax ; toa do y panel trai -= ax
 		mov ax, 0
-		cmp paddle_left_y, ax ; kiem tra xem panel da cham bien chua
-		jl FIX_PADDLE_LEFT_TOP_POSITION ; neu y < ax thi goi ham de giu panel khong bi tran bien
+		cmp paddle_left_y, ax ; kiem tra xem panel da chạm biên trên 
+		jl FIX_PADDLE_LEFT_TOP_POSITION ; neu y < 0 thi goi ham de giu panel khong bi tràn biên
 		ret
 
 	MOVE_LEFT_PADDLE_DOWN:
