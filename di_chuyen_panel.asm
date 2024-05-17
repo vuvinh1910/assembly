@@ -4,7 +4,8 @@ MOVE_PADDLES proc
 	int 16h
 	jnz CHECK_PADDLE_MOVEMENT ;nếu có phím nhấn, zero flag sẽ có giá trị 1
 	ret
-
+	;Trong hệ thống tọa độ màn hình, tọa độ Y tăng lên khi đi xuống dưới màn hình và giảm khi đi lên trên màn hình,
+	;tọa độ X tăng khi đi sang phải và giảm khi đi sang trái màn hình
 	CHECK_PADDLE_MOVEMENT:
 		mov ah, 00h ;   kiểm tra xem phím được nhấn là phím gì ?
 		int 16h	;  trả giá trị phím nhấn vào thanh ghi al
