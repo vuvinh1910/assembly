@@ -1,0 +1,20 @@
+.data
+      word db 'ktmt$'
+      word2 db 100 dup('$')
+.code
+main proc
+  mov ax,@data
+  mov ds,ax
+
+  ; nhap xau : ktmt
+  mov ah,10
+  lea dx,word2
+  int 21h
+
+  lea si,word    ; xau khai bao k se o vi tri dau tien
+  lea di,word+2  ; xau nhap k se o vi tri dau + 2
+
+  mov ah,0
+  int 21h
+  main endp
+end
